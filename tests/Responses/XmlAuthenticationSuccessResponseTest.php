@@ -76,6 +76,24 @@ class XmlAuthenticationSuccessResponseTest extends TestCase
         $this->assertContains('cas:key3', $content);
     }
 
+    public function testSetMultiValuedAttributes()
+    {
+        $resp    = Mockery::mock(XmlAuthenticationSuccessResponse::class, [])
+            ->makePartial()
+            ->shouldAllowMockingProtectedMethods()
+            ->shouldReceive('stringify')
+            ->andReturn('string')
+            ->getMock();
+        $content = $this->getXML($resp);
+        $this->assertNotContains('cas:attributes', $content);
+
+        $resp->setAttributes(['key1' => ['value1', 'value2']]);
+        $content = $this->getXML($resp);
+        $this->assertContains('cas:attributes', $content);
+        $this->assertContains('<cas:key1>value1</cas:key1>', $content);
+        $this->assertContains('<cas:key1>value2</cas:key1>', $content);
+    }
+
     public function testSetProxyGrantingTicket()
     {
         $resp    = new XmlAuthenticationSuccessResponse();
