@@ -58,7 +58,6 @@ class XmlAuthenticationSuccessResponseTest extends TestCase
             ->makePartial()
             ->shouldAllowMockingProtectedMethods()
             ->shouldReceive('stringify')
-            ->andReturn('string')
             ->getMock();
         $content = $this->getXML($resp);
         $this->assertNotContains('cas:attributes', $content);
