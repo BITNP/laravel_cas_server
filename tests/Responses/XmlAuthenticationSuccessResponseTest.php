@@ -54,11 +54,7 @@ class XmlAuthenticationSuccessResponseTest extends TestCase
 
     public function testSetAttributes()
     {
-        $resp    = Mockery::mock(XmlAuthenticationSuccessResponse::class, [])
-            ->makePartial()
-            ->shouldAllowMockingProtectedMethods()
-            ->shouldReceive('stringify')
-            ->getMock();
+        $resp    = new XmlAuthenticationSuccessResponse();
         $content = $this->getXML($resp);
         $this->assertNotContains('cas:attributes', $content);
 
@@ -77,11 +73,7 @@ class XmlAuthenticationSuccessResponseTest extends TestCase
 
     public function testSetMultiValuedAttributes()
     {
-        $resp    = Mockery::mock(XmlAuthenticationSuccessResponse::class, [])
-            ->makePartial()
-            ->shouldAllowMockingProtectedMethods()
-            ->shouldReceive('stringify')
-            ->getMock();
+        $resp    = new XmlAuthenticationSuccessResponse();
         $content = $this->getXML($resp);
         $this->assertNotContains('cas:attributes', $content);
 
